@@ -1,0 +1,15 @@
+<h2> Order List</h2>
+
+
+
+<% @orders.each do |order| %>
+    
+<li><p>Order Number: <%= order.id %></p>
+<p>Address: <%= order.address %></p>
+<p>Item: <%=order.item %></p>
+<p>Total: <%= order.total %></p>
+</li>
+
+
+ <% end %>
+ 

@@ -1,0 +1,9 @@
+
+ <% if logged_in?  %>
+ <h2>Welcome! You are logged in as <%= @user.username %></h2>
+ <a href='/orders/new'>Create an order</a>
+ <form method="POST" action="/users/logout">
+ <input type="hidden" name="_method" value="DELETE">
+ <input type="submit" value="logout">
+ </form>
+<% end %>

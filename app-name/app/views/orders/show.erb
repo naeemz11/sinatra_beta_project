@@ -1,0 +1,14 @@
+<layout>
+<p>Address:<%= @order.address %><br></p>
+<p>Item:<%= @order.item %><br></p>
+
+<p>Price:<%= @order.item_price %><br></p>
+<p>Total price:<%= @order.total %><br></p>
+</layout>
+
+<a href="/orders/<%=@order.id %>/edit">Edit Order</a>
+
+<form method="POST" action="/orders/<%=@order.id%>" >
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Order">
+</form>

@@ -1,0 +1,13 @@
+<h1>Edit Form</h1>
+
+<form action="/orders/<%= @order.id %>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    Address:<input type="text" value="<%=@order.address %>" name="address">
+    Item:<input type=text value="<%=@order.item %>" name="item">
+    
+    Item_price:<input type=number value="<%=@order.item_price %>" name="item_price">
+    Total:<input type=number value="<%=@order.total %>" name="total">
+
+    <input type=submit>
+   
+</form> 

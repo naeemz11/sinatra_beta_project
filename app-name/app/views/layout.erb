@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ACB</title>
+    </head>
+    <body>
+        <h1>ACB Store</h1>
+
+
+    <div class="nav">
+      <% if logged_in? %>
+      <a href='/'>Home</a> |
+        <a href='/orders/new'>Create Order</a> |
+        <a href='/orders'>View Orders</a> |
+        <a href='/users/logout'>Log Out</a> |
+    
+      <% end %>
+   </div>
+    
+        <%= yield %>
+
+  
+    </body>
+
+    
+    
+
+
+</html>

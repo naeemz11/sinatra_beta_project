@@ -1,0 +1,9 @@
+<h1>Login Page</h1>
+<%= @error%>
+<form action='/users/login' method="POST">
+    Username:<input type="text" name="username">
+    Password:<input type="password" name="password">
+    <input type="submit">
+</form>
+
+<a href="/users/signup">Sign up here!</a>
