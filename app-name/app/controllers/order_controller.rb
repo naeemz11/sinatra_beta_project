@@ -4,7 +4,7 @@ class OrderController < ApplicationController
   
   get '/orders/new' do 
     
-    if logged_in?
+    if logged_in? 
         erb :'/orders/new'
     else 
         @error = "Please log in or sign up!"
