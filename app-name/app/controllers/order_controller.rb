@@ -15,9 +15,10 @@ class OrderController < ApplicationController
   post '/orders' do #processes our form
     if logged_in?
         @order = Order.create(address: params[:address], item: params[:item], item_price: params[:item_price], total: params[:total])
-
+       
         redirect to "/orders/#{@order.id}"
         #now it needs to go to the read route 
+    
     else 
         redirect '/users/login'
     end 
