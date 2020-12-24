@@ -14,7 +14,7 @@ class OrderController < ApplicationController
 
   post '/orders' do #processes our form
     if logged_in?
-        @order = Order.create(address: params[:address], item: params[:item], item_price: params[:item_price], total: params[:total])
+        @order = Order.create(address: params[:address], user_id: session[:user_id],item: params[:item], item_price: params[:item_price], total: params[:total])
        
         redirect to "/orders/#{@order.id}"
         #now it needs to go to the read route 
@@ -34,7 +34,7 @@ class OrderController < ApplicationController
 
   get '/orders' do 
     if logged_in?
-        @orders = Order.all  #returns all the order info
+        @orders = current_user.orders  #returns all the order info
         erb :'/orders/index'
     else 
         @error = "Please log in or sign up!"
@@ -45,7 +45,7 @@ class OrderController < ApplicationController
   #update 
 
   get '/orders/:id/edit' do
-    if logged_in?
+    if logged_in? && @order.user_id == session[:user_id]
         @order = Order.find(params[:id])
         erb :'/orders/edit'
     else 
@@ -54,11 +54,11 @@ class OrderController < ApplicationController
     end 
   end 
 
-  post '/orders/:id' do
-    
-    @order = Order.find(params[:id])
-    @order.update(address: params[:address], item: params[:item], item_price: params[:item_price], total: params[:total])
-    
+  patch '/orders/:id' do
+    if logged_in? && @order.user_id == session[:user_id]
+      @order = Order.find(params[:id])
+      @order.update(address: params[:address], item: params[:item], item_price: params[:item_price], total: params[:total])
+    end 
     redirect "/orders/#{@order.id}"
   end
 
@@ -69,9 +69,10 @@ class OrderController < ApplicationController
 #     redirect to '/orders'
 #   end 
 
-  delete '/orders/:id/delete' do 
+  delete '/orders/:id' do 
     @order = Order.find_by_id(params[:id])
-    if logged_in? && @order.user_id == @user.id 
+    
+    if logged_in? && @order.user_id == session[:user_id]
         @order.destroy
     end
     redirect '/orders'
